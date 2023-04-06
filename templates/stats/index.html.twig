@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<!-- la liste des stats des joueurs-->
+                <div class="col-12 col-lg-10">
+
+                    <h2 class="text-muted fw-bold mb-4">Players stats</h2>
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm bg-white position-relative">
+                    <div class="col-12 p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary"></strong>
+                        <h3 class="mb-1"></h3>
+                        <div class="mb-1 text-muted"></div>
+                        <div class="row row-cols-16">
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>First name</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Last name</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Country</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Age</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Ability</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Serve</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Double</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Talent</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Power</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Speed</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Mentality</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Endurance</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Hard</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Clay</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Grass</small></p>
+                            </div>
+                            <div class="col border-end p-4 d-flex flex-column position-static">
+                                <p><small>Indoor</small></p>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <a href="" class="fs-1 mt-3 text-danger align-self-start">
+                            <i class="bi bi-arrow-right-square"></i>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- pagination -->
+            <nav class="col-lg-9 offset-lg-3">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link">&laquo;</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item" aria-current="page">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endblock %}
+
+
+

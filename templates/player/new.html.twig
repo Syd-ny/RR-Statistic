@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="col-12 col-lg-10">
+    <h2 class="text-muted fw-bold mb-4">Add new player</h2>
+        {{  form_start(form) }}
+            {{ form_label(form.firstname, 'First name',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.lastname, 'Last name',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.ability, 'Ability',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.ability, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.serve, 'Serve',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.serve, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.strenght, 'Strenght',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.strenght, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.speed, 'Speed',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.speed, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.mentality, 'Mentality',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.mentality, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.doubles, 'Doubles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.doubles, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.talent, 'Talent',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.talent, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.hard, 'Hard',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.hard, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.clay, 'Clay',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.clay, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.grass, 'Grass',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.grass, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.indoor, 'Indoor',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.indoor, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.age, 'Age',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.age, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.globalAgeFactor, 'Global age factor',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.globalAgeFactor, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.actualAgeFactor, 'Actual age factor',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.actualAgeFactor, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.bestRankingSingle, 'Best ranking in single',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.bestRankingSingle, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.bestRankingDouble, 'Best ranking in double',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.bestRankingDouble, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.weeksN1Single, 'Weeks n°1 in single',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.weeksN1Single, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.weeksN1Double, 'Weeks n°1 in double',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.weeksN1Double, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.atpSingleLow, 'ATP 250 single titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.atpSingleLow, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.atpDoubleLow, 'ATP 250 double titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.atpDoubleLow, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.atpSingleMid, 'ATP 500 single titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.atpSingleMid, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.atpDoubleMid, 'ATP 500 double titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.atpDoubleMid, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.atpSingleHigh, 'M1000 single titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.atpSingleHigh, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.atpDoubleHigh, 'M1000 double titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.atpDoubleHigh, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.tmcSingle, 'Tennis master cup single titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.tmcSingle, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.tmcDouble, 'Tennis master cup double titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.tmcDouble, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.gsSingle, 'Grand slam single titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.gsSingle, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.gsDouble, 'Grand slam double titles',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.gsDouble, {'attr': {'class': 'form-control'}}) }}
+
+            {{ form_label(form.statuses)}}
+            {{ form_widget(form.statuses) }}
+
+            {{ form_label(form.countries, 'Country',{'label_attr':{'class':'form-label'}}) }}
+            {{ form_widget(form.countries, {'attr': {'class': 'form-control'}}) }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {{  form_end(form)  }}
+    </form>
+</div>
+
+{% endblock %}
