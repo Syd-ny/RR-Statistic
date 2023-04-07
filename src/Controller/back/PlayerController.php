@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\back;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,7 +43,7 @@ class PlayerController extends AbstractController
        
         }
 
-        return $this->render('player/new.html.twig', [
+        return $this->render('back/player/new.html.twig', [
             'player'=> $player,
             'form' => $form->createView(),
         ]);

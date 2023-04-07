@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,7 @@ class HomeController extends AbstractController
         $allPlayers = $playerRepository->findAll();
 
         
-        return $this->render("home/index.html.twig", [
+        return $this->render("front/home/index.html.twig", [
             'players' => $allPlayers,
         ]);
     }
@@ -40,7 +40,7 @@ class HomeController extends AbstractController
     {
         
         
-        return $this->render("stats/index.html.twig");
+        return $this->render("front/stats/index.html.twig");
     }
 
 }
