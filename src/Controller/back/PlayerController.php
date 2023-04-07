@@ -39,7 +39,7 @@ class PlayerController extends AbstractController
             $entityManager->persist($player);
             $entityManager->flush();
         
-            return $this->redirectToRoute('stats_index', ['id' => $player->getId()]);
+            return $this->redirectToRoute('stats_players', ['id' => $player->getId()]);
        
         }
 

@@ -38,50 +38,47 @@
                             <hr class = "my-1">
                         </div>
             {% for player in players %}               
-                <div class="row{% if loop.index is even %} bg-light{% else %} bg-white{% endif %} py-2">
+                <div class="row{% if loop.index is even %} bg-secondary{% else %} bg-white{% endif %} py-1">
                     <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('stats_index', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
                             <p>{{ player.firstname }}</p>
                         </a>
                     </div>
                     <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('stats_index', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
                             <p>{{ player.lastname }}</p>
                         </a>
                     </div>
                     <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('stats_index', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
                             <p>{{ player.countries.getName }}</p>
                         </a>
                     </div>
                     <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('stats_index', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
                             <p>{{ player.age }}</p>
                         </a>
                     </div>
                     <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('stats_index', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
                             <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('stats_index', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
                             <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.doubles /2.5}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('stats_index', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
                             <p>not available now</p>
                         </a>
                     </div>
                     <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('stats_index', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
                             <p>not available now</p>
                         </a>
                     </div>
-                    <a href="{{ path('stats_index', {'id': player.id}) }}" class="fs-1 mt-3 text-danger align-self-start">
-                    <i class="bi bi-arrow-right-square"></i>
-                    </a>
                     <hr class = "my-1">
                 </div>
             {% endfor %}
