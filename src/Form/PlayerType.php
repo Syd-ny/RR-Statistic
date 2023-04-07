@@ -106,29 +106,31 @@ class PlayerType extends AbstractType
             ->add('gsDouble',NumberType::class,[
                 'attr'=>['type'=>'number'],
             ])
-            //->add('statuses', EntityType::class, [
-            //    'class' => Status::class,
-            //    'choice_label' => 'name',
-            //    'placeholder' => 'Choose a status',
-            //])
-            ->add('statuses',ChoiceType::class, [
-                'label' => 'Status',
-                'choices' => [
-                    'Junior' => 'Junior',
-                    'Senior' => 'Senior',
-                    'Trainer' => 'Trainer',
-                    'Retreated' => 'Retreated'
-                ],
-                // $reactions est un tableau, on doit donc configurer
-                // ce ChoiceType à multiple = true
+            ->add('statuses', EntityType::class, [
+                'class' => Status::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Choose a status',
                 'multiple' => false,
-                // un widget HTML par choix "étendu"
-                'expanded' => true,
-                'attr' => [
-                    'class' => 'form-check-label my-3'
-                ]
-            
+                'expanded' => false,
             ])
+            //->add('statuses',ChoiceType::class, [
+            //    'label' => 'Status',
+            //    'choices' => [
+            //        'Junior' => 'Junior',
+            //        'Senior' => 'Senior',
+            //        'Trainer' => 'Trainer',
+            //        'Retreated' => 'Retreated'
+            //    ],
+            //    // $reactions est un tableau, on doit donc configurer
+            //    // ce ChoiceType à multiple = true
+            //    'multiple' => false,
+            //    // un widget HTML par choix "étendu"
+            //    'expanded' => true,
+            //    'attr' => [
+            //        'class' => 'form-check-label my-3'
+            //    ]
+            //
+            //])
             
             
             ->add('countries', EntityType::class, [

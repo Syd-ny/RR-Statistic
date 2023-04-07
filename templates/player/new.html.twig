@@ -94,11 +94,11 @@
             {{ form_label(form.gsDouble, 'Grand slam double titles',{'label_attr':{'class':'form-label'}}) }}
             {{ form_widget(form.gsDouble, {'attr': {'class': 'form-control'}}) }}
 
-            {{ form_label(form.statuses)}}
-            {{ form_widget(form.statuses) }}
+            {{ form_label(form.statuses, 'Status',{'label_attr':{'class':'col-form-label'}})}}
+            {{ form_widget(form.statuses, {'attr': {'class': 'form-control'}}) }}
 
             {{ form_label(form.countries, 'Country',{'label_attr':{'class':'form-label'}}) }}
-            {{ form_widget(form.countries, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.countries, {'attr': {'class':'form-control'}}) }}
             <button type="submit" class="btn btn-primary">Submit</button>
         {{  form_end(form)  }}
     </form>
