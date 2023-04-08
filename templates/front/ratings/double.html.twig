@@ -3,7 +3,7 @@
 {% block body %}
 <!-- la liste des stats des joueurs-->
 <div class="col-12 col-lg-10">
-    <h2 class="text-muted fw-bold mb-4">Single Ratings</h2>
+    <h2 class="text-muted fw-bold mb-4">Ratings Double</h2>
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm bg-white position-relative">
         <div class="col-12 p-4 d-flex flex-column position-static">
             <strong class="d-inline-block mb-2 text-primary"></strong>
@@ -64,27 +64,27 @@
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.hard /100}}</p>
+                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.doubles /2.5 + player.hard /100}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.clay /100}}</p>
+                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.doubles /2.5 + player.clay /100}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.grass /100}}</p>
+                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.doubles /2.5 + player.grass /100}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.indoor /100}}</p>
+                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.doubles /2.5 + player.indoor /100}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 }}</p>
+                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.doubles /2.5 }}</p>
                         </a>
                     </div>
                     <hr class = "my-1">

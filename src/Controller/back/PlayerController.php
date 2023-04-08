@@ -48,4 +48,20 @@ class PlayerController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * Page d'affichage des informations d'un joueur spécifique.
+     * 
+     * @Route("/{id}", name="player_show", methods={"GET"})
+     */
+    public function show(Player $player = null): Response
+    {
+        if ($player === null) {
+            throw $this->createNotFoundException('Film ou série non trouvé.');
+        }
+
+        return $this->render('back/home/show.html.twig',[
+            'player'=> $player,
+        ]);
+    }
 }

@@ -8,43 +8,39 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\PlayerRepository;
 
-class HomeController extends AbstractController
+class RatingController extends AbstractController
 {
 
     /**
-     * la route par défaut
+     * la route des ratings en simple des joueurs
      *  
-     * @Route("/", name="default")
-     * @Route("/home", name="home_index")
+     * @Route("/ratings/single", name="ratings_single")
      * 
      * @return Response
      */
-    public function index(PlayerRepository $playerRepository): Response
+    public function ratingSingle(PlayerRepository $playerRepository): Response
     {
         $allPlayers = $playerRepository->findAll();
-
         
-        return $this->render("front/home/index.html.twig", [
+        return $this->render("front/ratings/single.html.twig",[
             'players' => $allPlayers,
         ]);
     }
 
     /**
-     * la route des statistiques des joueurs
+     * la route des ratings en double des joueurs
      *  
-     * @Route("/stats", name="stats_players")
+     * @Route("/ratings/double", name="ratings_double")
      * 
      * @return Response
      */
-    public function stats(PlayerRepository $playerRepository): Response
+    public function ratingDouble(PlayerRepository $playerRepository): Response
     {
         $allPlayers = $playerRepository->findAll();
         
-        return $this->render("front/stats/players.html.twig",[
+        return $this->render("front/ratings/double.html.twig",[
             'players' => $allPlayers,
         ]);
     }
-
-    
 
 }

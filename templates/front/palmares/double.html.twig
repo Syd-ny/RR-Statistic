@@ -3,7 +3,7 @@
 {% block body %}
 <!-- la liste des stats des joueurs-->
 <div class="col-12 col-lg-10">
-    <h2 class="text-muted fw-bold mb-4">Single Ratings</h2>
+    <h2 class="text-muted fw-bold mb-4">Double palmares</h2>
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm bg-white position-relative">
         <div class="col-12 p-4 d-flex flex-column position-static">
             <strong class="d-inline-block mb-2 text-primary"></strong>
@@ -23,19 +23,25 @@
                             <p><small>Age</small></p>
                         </div>
                         <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Rating hard</small></p>
+                            <p><small>ATP 250 titles</small></p>
                         </div>
                         <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Rating clay</small></p>
+                            <p><small>ATP 500 titles</small></p>
                         </div>
                         <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Rating grass</small></p>
+                            <p><small>M1000 titles</small></p>
                         </div>
                         <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Rating indoor</small></p>
+                            <p><small>Tennis master cup titles</small></p>
                         </div>
                         <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Raw rating</small></p>
+                            <p><small>Grand slam titles</small></p>
+                        </div>
+                        <div class="col border-end p-4 d-flex flex-column position-static">
+                            <p><small>Weeks n°1</small></p>
+                        </div>
+                        <div class="col border-end p-4 d-flex flex-column position-static">
+                            <p><small>Legacy score</small></p>
                         </div>
                     </div>
                     <hr>
@@ -64,27 +70,32 @@
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.hard /100}}</p>
+                            <p>{{ player.atpDoubleLow}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.clay /100}}</p>
+                            <p>{{ player.atpDoubleMid}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.grass /100}}</p>
+                            <p>{{ player.atpDoubleHigh}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.indoor /100}}</p>
+                            <p>{{ player.tmcDouble}}</p>
                         </a>
                     </div>
                     <div class="col border-end p-4 d-flex flex-column position-static">
                         <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 }}</p>
+                            <p>{{ player.gsDouble}}</p>
+                        </a>
+                    </div>
+                    <div class="col border-end p-4 d-flex flex-column position-static">
+                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                            <p>{{ player.atpDoubleLow + player.atpDoubleMid * 8 + player.atpDoubleHigh * 25 + player.tmcDouble * 35 + player.gsDouble * 100 + player.weeksN1Double * 3}}</p>
                         </a>
                     </div>
                     <hr class = "my-1">
