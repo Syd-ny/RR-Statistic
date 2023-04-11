@@ -57,11 +57,21 @@ class PlayerController extends AbstractController
     public function show(Player $player = null): Response
     {
         if ($player === null) {
-            throw $this->createNotFoundException('Film ou série non trouvé.');
+            throw $this->createNotFoundException('Joueur non trouvé.');
         }
 
-        return $this->render('back/home/show.html.twig',[
+        return $this->render('front/home/show.html.twig',[
             'player'=> $player,
         ]);
+    }
+
+    /**
+     * WIP : Ajouter un article
+     * 
+     * @Route("/post/add", name="post_add")
+     */
+    public function add()
+    {
+        return new Response('@todo : ajouter un article, accès administrateur seulement.</body>');
     }
 }
