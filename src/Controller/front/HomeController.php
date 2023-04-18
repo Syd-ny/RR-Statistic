@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\QueryBuilder;
 use App\Repository\PlayerRepository;
+use App\Service\PlayerPaginationService;
+use Knp\Component\Pager\PaginatorInterface;
 
 class HomeController extends AbstractController
 {
@@ -20,10 +22,9 @@ class HomeController extends AbstractController
      * 
      * @return Response
      */
-    public function index(PlayerRepository $playerRepository): Response
+    public function index(PlayerPaginationService $paginationService,Request $request): Response
     {
-        
-        $allPlayers = $playerRepository->findAllOrderedByLastCreated();
+        $allPlayers = $paginationService->getPlayersOrderedByLastCreated($request);
         
         return $this->render("front/home/index.html.twig", [
             'players' => $allPlayers,
@@ -37,9 +38,9 @@ class HomeController extends AbstractController
      * 
      * @return Response
      */
-    public function stats(PlayerRepository $playerRepository): Response
+    public function stats(PlayerPaginationService $paginationService,Request $request): Response
     {
-        $allPlayers = $playerRepository->findAllOrderedByName();
+        $allPlayers = $paginationService->getPlayersOrderedByName($request);
         
         return $this->render("front/stats/players.html.twig",[
             'players' => $allPlayers,

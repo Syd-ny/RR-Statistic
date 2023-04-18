@@ -2,11 +2,13 @@
 
 namespace App\Controller\front;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\PlayerRepository;
+use App\Service\PlayerPaginationService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\PlayerRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class PalmaresController extends AbstractController
 {
@@ -18,9 +20,9 @@ class PalmaresController extends AbstractController
      * 
      * @return Response
      */
-    public function palmaresSingle(PlayerRepository $playerRepository): Response
+    public function palmaresSingle(PlayerPaginationService $paginationService,Request $request): Response
     {
-        $allPlayers = $playerRepository->findAllOrderedBySingleLegacyScore();
+        $allPlayers = $paginationService->getPlayersOrderedBySingleLegacy($request);
         
         return $this->render("front/palmares/single.html.twig",[
             'players' => $allPlayers,
@@ -34,9 +36,9 @@ class PalmaresController extends AbstractController
      * 
      * @return Response
      */
-    public function palmaresDouble(PlayerRepository $playerRepository): Response
+    public function palmaresDouble(PlayerPaginationService $paginationService,Request $request): Response
     {
-        $allPlayers = $playerRepository->findAllOrderedByDoublesLegacyScore();
+        $allPlayers = $paginationService->getPlayersOrderedByDoubleLegacy($request);
         
         return $this->render("front/palmares/double.html.twig",[
             'players' => $allPlayers,
@@ -50,9 +52,9 @@ class PalmaresController extends AbstractController
      * 
      * @return Response
      */
-    public function palmaresGlobal(PlayerRepository $playerRepository): Response
+    public function palmaresGlobal(PlayerPaginationService $paginationService,Request $request): Response
     {
-        $allPlayers = $playerRepository->findAllOrderedByGlobalLegacyScore();
+        $allPlayers = $paginationService->getPlayersOrderedByGlobalLegacy($request);
         
         return $this->render("front/palmares/global.html.twig",[
             'players' => $allPlayers,

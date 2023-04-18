@@ -174,11 +174,25 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Potential single</th>
-                                    <td>not available now</td>
+                                    {% set singlePotential = ((player.strenght / ( player.actualAgeFactor / 100 )) / 5 
+                                    + (player.speed / ( player.actualAgeFactor / 100)) / 10
+                                    + (player.endurance / (( player.actualAgeFactor / 100 ) * ( player.actualAgeFactor / 100))) ** 0.65
+                                    * 1.4 * 0.91 * 0.91 
+                                    + player.talent ** 0.7  
+                                    + ( player.mentality / 10 )) 
+                                    * 1.25 %}
+                                    <td>{{ singlePotential | round(2) }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Potential double</th>
-                                    <td>not available now</td>
+                                    {% set doublePotential = ((player.strenght / ( player.actualAgeFactor / 100 )) / 5 * 0.83 
+                                    + (player.speed / ( player.actualAgeFactor / 100)) / 10 * 0.83
+                                    + (player.endurance / (( player.actualAgeFactor / 100 ) * ( player.actualAgeFactor / 100))) ** 0.95
+                                    * 1.3 * 0.83 * 0.83 
+                                    + player.talent ** 0.95 
+                                    + ( player.mentality / 10 )) 
+                                    * 1.17 %}
+                                    <td>{{ doublePotential | round(2) }}</td>
                                 </tr>
                             </tbody>
                         </table>

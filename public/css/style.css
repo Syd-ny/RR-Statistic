@@ -10,3 +10,38 @@
 .text-player {
     color:white;
 }
+
+.pagination {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  
+  .page-item {
+    display: inline-block;
+    margin-right: 0.25rem;
+  }
+  
+  .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+  }
+  
+  .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .page-link {
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+  }
+  
+  .page-link:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+  

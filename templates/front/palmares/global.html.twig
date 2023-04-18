@@ -34,6 +34,11 @@
                     </div>
                     {% include 'partials/array/format.html.twig' %}
                         {% include 'partials/player/show.html.twig' %}
+                            <p>{{ player.weeksN1Single + player.weeksN1Double }}</p>
+                        </a>
+                    </div>
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             {% set palmares = (player.atpSingleLow + player.atpSingleMid * 8 + player.atpSingleHigh * 25 + player.tmcSingle * 35 + player.gsSingle * 100 + player.weeksN1Single * 3) + (player.atpDoubleLow + player.atpDoubleMid * 8 + player.atpDoubleHigh * 25 + player.tmcDouble * 35 + player.gsDouble * 100 + player.weeksN1Double * 3) / 3.5 %}
                             <p>{{ palmares | round(0) }}</p>
                         </a>
@@ -46,21 +51,7 @@
         </div>
 
         <!-- pagination -->
-        <nav class="col-lg-9 offset-lg-3">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link">&laquo;</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item" aria-current="page">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">&raquo;</a>
-                </li>
-            </ul>
-        </nav>
+        {% include 'partials/pagination/tableau.html.twig' %}
     </div>
 </div>
 {% endblock %}

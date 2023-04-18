@@ -650,4 +650,5 @@ class Player
 
         return $this;
     }
+
 }

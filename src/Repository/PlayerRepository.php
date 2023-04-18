@@ -5,22 +5,26 @@ namespace App\Repository;
 use App\Entity\Player;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Expr\Func;
+use DoctrineExtensions\Query\Mysql\Power;
 
 /**
- * @extends ServiceEntityRepository<Player>
+ * @extends EntityRepository<Player>
  *
  * @method Player|null find($id, $lockMode = null, $lockVersion = null)
  * @method Player|null findOneBy(array $criteria, array $orderBy = null)
  * @method Player[]    findAll()
  * @method Player[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlayerRepository extends ServiceEntityRepository
+class PlayerRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        parent::__construct($registry, Player::class);
+        parent::__construct($entityManager, $entityManager->getClassMetadata(Player::class));
     }
 
     public function add(Player $entity, bool $flush = false): void
@@ -51,7 +55,6 @@ class PlayerRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->addSelect('COALESCE(p.updatedAt, p.createdAt) as HIDDEN myDate')
             ->orderBy('myDate','DESC')
-            ->setMaxResults(20)
             ->getQuery()
             ->getResult();
     }
@@ -64,7 +67,6 @@ class PlayerRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.firstname','ASC')
-            ->setMaxResults(20)
             ->getQuery()
             ->getResult();
     }
@@ -78,7 +80,6 @@ class PlayerRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->addSelect('(p.ability + p.serve /2 + p.strenght /5 + p.speed /10 + p.mentality /10) as HIDDEN rating')
             ->orderBy('rating','DESC')
-            ->setMaxResults(20)
             ->getQuery()
             ->getResult();
     }
@@ -92,7 +93,6 @@ class PlayerRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->addSelect('(p.ability + p.serve /2 + p.strenght /5 + p.speed /10+ p.mentality /10 + p.doubles /2.5) as HIDDEN rating')
             ->orderBy('rating','DESC')
-            ->setMaxResults(20)
             ->getQuery()
             ->getResult();
     }
@@ -106,7 +106,6 @@ class PlayerRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->addSelect('(p.atpSingleLow + p.atpSingleMid * 8 + p.atpSingleHigh * 25 + p.tmcSingle * 35 + p.gsSingle * 100 + p.weeksN1Single * 3) as HIDDEN score')
             ->orderBy('score','DESC')
-            ->setMaxResults(20)
             ->getQuery()
             ->getResult();
     }
@@ -120,7 +119,20 @@ class PlayerRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->addSelect('(p.atpDoubleLow + p.atpDoubleMid * 8 + p.atpDoubleHigh * 25 + p.tmcDouble * 35 + p.gsDouble * 100 + p.weeksN1Double * 3) as HIDDEN score')
             ->orderBy('score','DESC')
-            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult();
+    }
+
+    
+    /**
+     * Trie les joueurs selon leur legacy score global.
+     *
+     */
+    public function findAllOrderedByGlobalLegacyScore()
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('(p.atpSingleLow + p.atpSingleMid * 8 + p.atpSingleHigh * 25 + p.tmcSingle * 35 + p.gsSingle * 100 + p.weeksN1Single * 3) + (p.atpDoubleLow + p.atpDoubleMid * 8 + p.atpDoubleHigh * 25 + p.tmcDouble * 35 + p.gsDouble * 100 + p.weeksN1Double * 3) / 3.5 as HIDDEN global')
+            ->orderBy('global','DESC')
             ->getQuery()
             ->getResult();
     }
@@ -131,20 +143,20 @@ class PlayerRepository extends ServiceEntityRepository
      */
     public function findAllOrderedByPotentialSingle()
     {
-        return $this->createQueryBuilder('p')
-            ->addSelect('(( 
-                (
-                    (p.strenght / ( p.actualAgeFactor / 100 )) / 5 
-                    * ( 1 + (( p.globalAgeFactor - 100) / 200 ))
-                    ) 
-                    + (p.speed / ( p.actualAgeFactor / 100)) / 10 
-                    * ( 1 + (( p.globalAgeFactor - 100) / 200) 
-                    + ((p.endurance / (( p.actualAgeFactor / 100 ) * ( p.actualAgeFactor / 100)) ** (0.65 - (( p.globalAgeFactor - 100) / 1000))) * 1.4 * ( 0.91 + (( p.globalAgeFactor - 100) / 200)) * ( 0.91 + (( p.globalAgeFactor - 100) / 200)) + p.talent ** ( 0.7 - (( p.globalAgeFactor - 100 ) / 1000)) + ( p.mentality / 10 )) * 1.25   as HIDDEN potential')
-            ->orderBy('potential','DESC')
-            ->setMaxResults(20)
-            ->getQuery()
-            ->getResult();
+    return $this->createQueryBuilder('p')
+        ->select('(p.strength / ( p.actualAgeFactor / 100 )) / 5 as strength')
+        ->addSelect('(p.speed / ( p.actualAgeFactor / 100 )) / 10 as speed')
+        ->addSelect('POWER((p.endurance / (( p.actualAgeFactor / 100 ) * ( p.actualAgeFactor / 100))), 0.65) * 1.4 * 0.91 * 0.91 as endurance')
+        ->addSelect('POWER(p.talent, 0.7) as talent')
+        ->addSelect('(p.mentality / 10) as mentality')
+        ->addSelect('strength + speed + endurance + talent + mentality as potential')
+        ->orderBy('potential','DESC')
+        ->setMaxResults(20)
+        ->getQuery()
+        ->getResult();
     }
+
+
 
 
 
