@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\QueryBuilder;
 use App\Repository\PlayerRepository;
 
 class HomeController extends AbstractController
@@ -21,8 +22,8 @@ class HomeController extends AbstractController
      */
     public function index(PlayerRepository $playerRepository): Response
     {
-        $allPlayers = $playerRepository->findAll();
-
+        
+        $allPlayers = $playerRepository->findAllOrderedByLastCreated();
         
         return $this->render("front/home/index.html.twig", [
             'players' => $allPlayers,
@@ -38,7 +39,7 @@ class HomeController extends AbstractController
      */
     public function stats(PlayerRepository $playerRepository): Response
     {
-        $allPlayers = $playerRepository->findAll();
+        $allPlayers = $playerRepository->findAllOrderedByName();
         
         return $this->render("front/stats/players.html.twig",[
             'players' => $allPlayers,

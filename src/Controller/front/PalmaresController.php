@@ -20,7 +20,7 @@ class PalmaresController extends AbstractController
      */
     public function palmaresSingle(PlayerRepository $playerRepository): Response
     {
-        $allPlayers = $playerRepository->findAll();
+        $allPlayers = $playerRepository->findAllOrderedBySingleLegacyScore();
         
         return $this->render("front/palmares/single.html.twig",[
             'players' => $allPlayers,
@@ -36,7 +36,7 @@ class PalmaresController extends AbstractController
      */
     public function palmaresDouble(PlayerRepository $playerRepository): Response
     {
-        $allPlayers = $playerRepository->findAll();
+        $allPlayers = $playerRepository->findAllOrderedByDoublesLegacyScore();
         
         return $this->render("front/palmares/double.html.twig",[
             'players' => $allPlayers,
@@ -52,7 +52,7 @@ class PalmaresController extends AbstractController
      */
     public function palmaresGlobal(PlayerRepository $playerRepository): Response
     {
-        $allPlayers = $playerRepository->findAll();
+        $allPlayers = $playerRepository->findAllOrderedByGlobalLegacyScore();
         
         return $this->render("front/palmares/global.html.twig",[
             'players' => $allPlayers,

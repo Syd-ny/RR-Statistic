@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="col-12 col-lg-10">
-    <h2 class="text-muted fw-bold mb-4">Add new player</h2>
+    <h2 class="text-muted fw-bold mb-4">Modify {{ player.firstname }} {{ player.lastname }}</h2>
         {{  form_start(form) }}
             {{ form_label(form.firstname, 'First name',{'label_attr':{'class':'form-label'}}) }}
             {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
@@ -102,7 +102,7 @@
 
             {{ form_label(form.countries, 'Country',{'label_attr':{'class':'form-label'}}) }}
             {{ form_widget(form.countries, {'attr': {'class':'form-control'}}) }}
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Modify</button>
         {{  form_end(form)  }}
     </form>
 </div>

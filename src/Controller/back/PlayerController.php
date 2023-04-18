@@ -6,7 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\PlayerType;
+use App\Form\NewPlayerType;
+use App\Form\EditPlayerType;
 use App\Entity\Player;
 use App\Repository\PlayerRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +28,7 @@ class PlayerController extends AbstractController
     {
 
         $player = new Player();
-        $form = $this->createForm(PlayerType::class,$player);
+        $form = $this->createForm(NewPlayerType::class,$player);
         
         $form->handleRequest($request);
         
@@ -39,23 +40,52 @@ class PlayerController extends AbstractController
             $entityManager->persist($player);
             $entityManager->flush();
         
-            return $this->redirectToRoute('stats_players', ['id' => $player->getId()]);
+            return $this->redirectToRoute('player_show', ['id' => $player->getId()]);
        
         }
 
-        return $this->render('back/player/new.html.twig', [
+        return $this->renderForm('back/player/new.html.twig', [
             'player'=> $player,
-            'form' => $form->createView(),
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * Le formulaire d'édition d'un joueur
+     * 
+     * @Route("/player/{id}/edit", name="player_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request,EntityManagerInterface $entityManager, Player $player)
+    {
+        $form = $this->createForm(EditPlayerType::class, $player);
+
+        $form->setData($player);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()&& $form->isValid()) {
+            $player->setUpdatedAt(new DateTime());
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('player_show',['id' => $player->getId()]);
+        }
+
+        return $this->renderForm('back/player/edit.html.twig', [
+            'player' => $player,
+            'form' => $form,
         ]);
     }
 
     /**
      * Page d'affichage des informations d'un joueur spécifique.
      * 
-     * @Route("/{id}", name="player_show", methods={"GET"})
+     * @Route("/show/{id}", name="player_show", methods={"GET"})
      */
-    public function show(Player $player = null): Response
+    public function show($id, PlayerRepository $playerRepository): Response
     {
+        $player = $playerRepository->find($id);
+
         if ($player === null) {
             throw $this->createNotFoundException('Joueur non trouvé.');
         }

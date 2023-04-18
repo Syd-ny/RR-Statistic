@@ -1,3 +1,9 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+# nom de la route
+app_logout:
+    # chemin
+    path: /logout
+    # pas de contrôleur, le composant de sécurité prend la main

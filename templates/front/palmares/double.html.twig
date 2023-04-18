@@ -4,97 +4,41 @@
 <!-- la liste des stats des joueurs-->
 <div class="col-12 col-lg-10">
     <h2 class="text-muted fw-bold mb-4">Double palmares</h2>
-    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm bg-white position-relative">
-        <div class="col-12 p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary"></strong>
-            <h3 class="mb-1"></h3>
-            <div class="mb-1 text-muted"></div>
-                <div class="row row-cols-16 align-items-center py-1">
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>First name</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Last name</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Country</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Age</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>ATP 250 titles</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>ATP 500 titles</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>M1000 titles</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Tennis master cup titles</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Grand slam titles</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Weeks n°1</small></p>
-                        </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
-                            <p><small>Legacy score</small></p>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
+        {% include 'partials/header/palmares.html.twig' %}
             {% for player in players %}               
-                <div class="row{% if loop.index is even %} bg-secondary{% else %} bg-white{% endif %} row-cols-16 align-items-center py-1">
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.firstname }}</p>
-                        </a>
-                    </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.lastname }}</p>
-                        </a>
-                    </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.countries.getName }}</p>
-                        </a>
-                    </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>{{ player.age }}</p>
-                        </a>
-                    </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                {% include 'partials/player/infos.html.twig' %}
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.atpDoubleLow}}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.atpDoubleMid}}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.atpDoubleHigh}}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.tmcDouble}}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.gsDouble}}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
+                            <p>{{ player.weeksN1Double}}</p>
+                        </a>
+                    </div>
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.atpDoubleLow + player.atpDoubleMid * 8 + player.atpDoubleHigh * 25 + player.tmcDouble * 35 + player.gsDouble * 100 + player.weeksN1Double * 3}}</p>
                         </a>
                     </div>

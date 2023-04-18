@@ -1,72 +1,190 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
-    <div class="container bg-lighttt pt-5">
-
-        <div class="row mb-2">
-
-            <div class="col">
-
-                <div
-                    class="row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
-                    <div class="col-4 movie__poster img-thumbnail"
-                        style="background-image: url({{ movie.poster }});">
-                        <img src="{{ asset('images/poster-placeholder.png') }}" class="img-fluid">
-                        <!-- img src="https://m.media-amazon.com/images/M/MV5BNThmZGY4NzgtMTM4OC00NzNkLWEwNmEtMjdhMGY5YTc1NDE4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg" class="img-fluid" -->
-                    </div>
-
-                    <div class="col-8 p-4 d-flex flex-column position-static bg-light">
-                        <a href="" class="movie__favorite fs-1 my-2 mx-3 link-danger"><i class="bi bi-bookmark-plus"></i></a>
-                        <strong class="d-inline-block mb-2 text-primary">{{ movie.type }}</strong>
-                        <h3 class="mb-1">{{ movie.title }}</h3>
-                        <div class="mb-1 text-muted">{{ movie.duration }} min</div>
-                        <p>
-                            {% for genre in movie.genres %}
-                                <span class="badge bg-warning text-dark">{{ genre.name }}</span>
-                            {% else %}
-                                <em>pas de genre pour ce film</em>
-                            {% endfor %}
-                        </p>
-                        <p>{{ movie.synopsis }}</p>
-                        <div class="d-flex mb-4" style="color: orange;">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span class="ps-1">{{ movie.rating }}</span>
-                        </div>
-                        {# https://twig.symfony.com/doc/3.x/tags/if.html #}
-                        {% if movie.type == 'série' %}
-                            {# https://twig.symfony.com/doc/3.x/filters/length.html #}
-                            <h2>{{ movie.seasons|length }} Saisons</h2>
-                            <ul class="list-unstyled">
-                                {% for season in movie.seasons %}
-                                    <li><span class="badge bg-danger fs-6 mb-2">Saison {{ season.number }}</span><small class="ms-1">({{ season.episodesNumber }} épisodes)</small></li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-
-                        <dl class="row">
-                            <dt class="col-sm-12">Avec</dt>
-                            <dd class="col-sm-12">
-                                Acteur 1 (Tilt)<br>
-                                Acteur 2 (La reine)<br>
-                                Acteur 3 (Franz)<br>
-                            </dd>
-                            <dt class="col-sm-12">Pays</dt>
-                            <dd class="col-sm-12">USA</dd>
-                            <dt class="col-sm-12">Année</dt>
-                            <dd class="col-sm-12">{{ movie.releaseDate|date("Y") }}</dd>
-                        </dl>
-
+    <div class="col-12 col-lg-10">
+        <h2 class="text-muted fw-bold mb-1">Page view of {{ player.firstname }} {{ player.lastname }} : {{ player.statuses.getName }}</h2>
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-1 shadow-sm bg-white position-relative">
+            <div class="col-12 p-4 d-flex flex-column position-static">
+                <div class="row">
+                    <div class="col-md-8">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td colspan="h4 text-primary"><h3>Player informations :</h3></td>
+                                    <td><a href="{{ path('player_edit', {'id': player.id}) }}" class="btn btn-primary float-end mb-3">Edit player</a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">First name</th>
+                                    <td>{{ player.firstname }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Last name</th>
+                                    <td>{{ player.lastname }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Country</th>
+                                    <td>{{ player.countries.getName }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Age</th>
+                                    <td>{{ player.age }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="h4 text-primary"><h3>Statistics :</h3></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Ability</th>
+                                    <td>{{ player.ability }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Serve</th>
+                                    <td>{{ player.serve }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Strenght</th>
+                                    <td>{{ player.strenght }}</td>
+                                    <th scope="row">Max strenght</th>
+                                    {% set maxStrenght = player.strenght / player.actualAgeFactor * 100 %}
+                                    <td>{{ maxStrenght | round(2) }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Speed</th>
+                                    <td>{{ player.speed }}</td>
+                                    <th scope="row">Max speed</th>
+                                    {% set maxSpeed = player.speed / player.actualAgeFactor * 100 %}
+                                    <td>{{ maxSpeed | round(2) }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Mentality</th>
+                                    <td>{{ player.mentality }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Double</th>
+                                    <td>{{ player.doubles }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Talent</th>
+                                    <td>{{ player.talent }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="h4 text-primary"><h3>Surfaces :</h3></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Hard</th>
+                                    <td>{{ player.hard }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Clay</th>
+                                    <td>{{ player.clay }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Grass</th>
+                                    <td>{{ player.grass }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Indoor</th>
+                                    <td>{{ player.indoor }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="h4 text-primary"><h3>Age factor :</h3></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Global age factor</th>
+                                    <td>{{ player.globalAgeFactor }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Actual age factor</th>
+                                    <td>{{ player.actualAgeFactor }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="h4 text-primary"><h3>Ranking informations :</h3></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Best ranking single</th>
+                                    <td>{{ player.bestRankingSingle }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Best ranking double</th>
+                                    <td>{{ player.bestRankingDouble }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Weeks n°1 single</th>
+                                    <td>{{ player.weeksN1Single }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Weeks n°1 double</th>
+                                    <td>{{ player.weeksN1Double }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="h4 text-primary"><h3>Single titles : {{ player.atpSingleLow + player.atpSingleMid * 8 + player.atpSingleHigh * 25 + player.tmcSingle * 35 + player.gsSingle * 100 + player.weeksN1Single * 3}} pts</h3></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ATP 250 titles</th>
+                                    <td>{{ player.atpSingleLow }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ATP 500 titles</th>
+                                    <td>{{ player.atpSingleMid}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Master 1000 titles</th>
+                                    <td>{{ player.atpSingleHigh }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Tennis master cup titles</th>
+                                    <td>{{ player.tmcSingle }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Grand slam titles</th>
+                                    <td>{{ player.gsSingle }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="h4 text-primary"><h3>Double titles : {{ player.atpDoubleLow + player.atpDoubleMid * 8 + player.atpDoubleHigh * 25 + player.tmcDouble * 35 + player.gsDouble * 100 + player.weeksN1Double * 3}} pts</h3></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ATP 250 titles</th>
+                                    <td>{{ player.atpDoubleLow }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ATP 500 titles</th>
+                                    <td>{{ player.atpDoubleMid}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Master 1000 titles</th>
+                                    <td>{{ player.atpDoubleHigh }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Tennis master cup titles</th>
+                                    <td>{{ player.tmcDouble }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Grand slam titles</th>
+                                    <td>{{ player.gsDouble }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="h4 text-primary"><h3>Player ratings :</h3></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Rating single</th>
+                                    <td>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Rating double</th>
+                                    <td>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.doubles /2.5 }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Potential single</th>
+                                    <td>not available now</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Potential double</th>
+                                    <td>not available now</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
             </div>
-
         </div>
-{% dump(movie) %}
     </div>
 {% endblock %}

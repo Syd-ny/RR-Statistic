@@ -2,7 +2,7 @@ security:
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'plaintext'
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         backend_users:
@@ -11,7 +11,7 @@ security:
                 # la liste des utilisateurs
                 users:
                     # nom d'utilisateur, mot de passe, ses rôles
-                    admin: { password: 'admin', roles: ['ROLE_ADMIN'] }
+                    admin: { password: '$2y$13$Y7OLsEw5HyGbQOyuXyHlAeN5tobtHGxpjF6w3egtlxjbheNX6Pvs.', roles: ['ROLE_ADMIN'] }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -26,12 +26,19 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+            logout:
+                path: app_logout 
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # on restreint l'accès à la page d'ajout d'un article
-        - { path: ^/post/add, roles: ROLE_ADMIN }
+        # on restreint l'accès à la page d'ajout d'un joueur
+        - { path: ^/back, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_MANAGER
+        ROLE_MANAGER : ROLE_USER
 
 when@test:
     security:

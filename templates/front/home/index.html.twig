@@ -4,78 +4,59 @@
 <!-- la liste des nouveaux joueurs-->
     <div class="col-12 col-lg-10">
         <h2 class="text-muted fw-bold mb-1">New players</h2>
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-1 shadow-sm bg-white position-relative">
-            <div class="col-12 p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary"></strong>
-                <h3 class="mb-1">Last updated players</h3>
-                <hr class = "my-1">
-                <div class="mb-1 text-muted"></div>
-                    <div class="row bg-light">
-                            <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                                <p><small>First name</small></p>
-                            </div>
-                            <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                                <p><small>Last name</small></p>
-                            </div>
-                            <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                                <p><small>Country</small></p>
-                            </div>
-                            <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                                <p><small>Age</small></p>
-                            </div>
-                            <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                                <p><small>Rating single</small></p>
-                            </div>
-                            <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                                <p><small>Rating double</small></p>
-                            </div>
-                            <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                                <p><small>Potential single</small></p>
-                            </div>
-                            <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                                <p><small>Potential double</small></p>
-                            </div>
-                            <hr class = "my-1">
-                        </div>
+        {% include 'partials/header/index.html.twig' %}
             {% for player in players %}               
-                <div class="row{% if loop.index is even %} bg-secondary{% else %} bg-white{% endif %} py-1">
-                    <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('player_show', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                {% include 'partials/array/looks.html.twig' %}
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.firstname }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('player_show', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.lastname }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('player_show', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.countries.getName }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('player_show', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.age }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('player_show', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10}}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('player_show', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.ability + player.serve /2 + player.strenght /5 + player.speed /10+ player.mentality /10 + player.doubles /2.5}}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('player_show', {'id': player.id}) }}" class="text-dark text-decoration-none">
-                            <p>not available now</p>
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
+                            <p>{{
+                                    (
+                                        (player.strenght / ( player.actualAgeFactor / 100 )) / 5 
+                                        * ( 1 + (( player.globalAgeFactor - 100) / 200 ))
+                                    ) 
+                                    + (player.speed / ( player.actualAgeFactor / 100)) / 10 
+                                    * ( 1 + (( player.globalAgeFactor - 100) / 200) 
+                                    + (player.endurance / (( player.actualAgeFactor / 100 ) * ( player.actualAgeFactor / 100))) ** (0.65 - (( player.globalAgeFactor - 100) / 1000))
+                                    * 1.4 
+                                    * ( 0.91 + (( player.globalAgeFactor - 100) / 200)) 
+                                    * ( 0.91 + (( player.globalAgeFactor - 100) / 200)) 
+                                    + player.talent ** ( 0.7 - (( player.globalAgeFactor - 100 ) / 1000))
+                                    + ( player.mentality / 10 )
+                                ) * 1.25 }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-1 d-flex flex-column position-static text-center">
-                        <a href="{{ path('player_show', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>not available now</p>
                         </a>
                     </div>

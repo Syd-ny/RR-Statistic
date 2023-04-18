@@ -43,7 +43,44 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('player_new') }}"><i class="bi bi-bookmark"></i> Add player</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=""><i class="bi bi-bookmark"></i> Simulate matches</a>
+                        </li>
                     </ul>
+
+                    {# le user est-il connecté ? #}
+                    {# {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} #}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {# connecté #}
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                    <span></span>
+                                    <i class="bi bi-person-square"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><h6 class="dropdown-header">
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                        Administrateur
+                                        {% elseif is_granted('ROLE_MANAGER') %}
+                                        Gestionnaire
+                                        {% elseif is_granted('ROLE_USER') %}
+                                        Utilisateur
+                                        {% endif %}
+                                    </h6></li>
+                                    <li><a class="dropdown-item" href="">Mot de passe</a></li>
+                                    <li><a class="dropdown-item" href="">Backoffice</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="">Déconnexion</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% else %}
+                        {# non connecté #}
+                    <a href="" class="btn btn-danger me-2">Connexion</a>
+                    {% endif %}
 
                     <form class="d-flex" action="list.html">
                         <input class="form-control form-control-sm me-2" name="search" type="search" placeholder="Rechercher...">
@@ -78,7 +115,7 @@
                             <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="{{ path('ratings_double') }}">Double ratings</a>
                         </li>
                         <li class="btn-group" role="group">
-                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="#">Single potentials</a>
+                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="{{ path('potential_single') }}">Single potentials</a>
                         </li>
                         <li class="btn-group" role="group">
                             <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="#">Double potentials</a>

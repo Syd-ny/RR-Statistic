@@ -20,7 +20,7 @@ class RatingController extends AbstractController
      */
     public function ratingSingle(PlayerRepository $playerRepository): Response
     {
-        $allPlayers = $playerRepository->findAll();
+        $allPlayers = $playerRepository->findAllOrderedBySingleRating();
         
         return $this->render("front/ratings/single.html.twig",[
             'players' => $allPlayers,
@@ -36,7 +36,7 @@ class RatingController extends AbstractController
      */
     public function ratingDouble(PlayerRepository $playerRepository): Response
     {
-        $allPlayers = $playerRepository->findAll();
+        $allPlayers = $playerRepository->findAllOrderedByDoublesRating();
         
         return $this->render("front/ratings/double.html.twig",[
             'players' => $allPlayers,

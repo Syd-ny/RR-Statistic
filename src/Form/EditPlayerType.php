@@ -9,13 +9,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Status;
 use App\Entity\Country;
 
 
 
-class PlayerType extends AbstractType
+class EditPlayerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -32,6 +33,9 @@ class PlayerType extends AbstractType
                 'scale'=>1
             ])
             ->add('speed',NumberType::class,[
+                'scale'=>1
+            ])
+            ->add('endurance',NumberType::class,[
                 'scale'=>1
             ])
             ->add('mentality',NumberType::class,[

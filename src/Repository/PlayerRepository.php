@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Player;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @extends ServiceEntityRepository<Player>
@@ -38,6 +40,113 @@ class PlayerRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    
+    /** 
+     * Trie les joueurs selon leur date de mise à jour, du plus récent au plus ancien.
+     * 
+     * IFNULL, permet d'ajouter une condition qui dit que si updatedAt est nul alors il prendra la veleure createdAt.
+    */
+    public function findAllOrderedByLastCreated()
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('COALESCE(p.updatedAt, p.createdAt) as HIDDEN myDate')
+            ->orderBy('myDate','DESC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Trie les joueurs selon leur nom, A-Z.
+     *
+     */
+    public function findAllOrderedByName()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.firstname','ASC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Trie les joueurs selon leur rating en simple
+     *
+     */
+    public function findAllOrderedBySingleRating()
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('(p.ability + p.serve /2 + p.strenght /5 + p.speed /10 + p.mentality /10) as HIDDEN rating')
+            ->orderBy('rating','DESC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Trie les joueurs selon leur rating en double
+     *
+     */
+    public function findAllOrderedByDoublesRating()
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('(p.ability + p.serve /2 + p.strenght /5 + p.speed /10+ p.mentality /10 + p.doubles /2.5) as HIDDEN rating')
+            ->orderBy('rating','DESC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Trie les joueurs selon leur legacy score en simple.
+     *
+     */
+    public function findAllOrderedBySingleLegacyScore()
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('(p.atpSingleLow + p.atpSingleMid * 8 + p.atpSingleHigh * 25 + p.tmcSingle * 35 + p.gsSingle * 100 + p.weeksN1Single * 3) as HIDDEN score')
+            ->orderBy('score','DESC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Trie les joueurs selon leur legacy score en double.
+     *
+     */
+    public function findAllOrderedByDoublesLegacyScore()
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('(p.atpDoubleLow + p.atpDoubleMid * 8 + p.atpDoubleHigh * 25 + p.tmcDouble * 35 + p.gsDouble * 100 + p.weeksN1Double * 3) as HIDDEN score')
+            ->orderBy('score','DESC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Trie les joueurs selon leur potentiel
+     *
+     */
+    public function findAllOrderedByPotentialSingle()
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('(( 
+                (
+                    (p.strenght / ( p.actualAgeFactor / 100 )) / 5 
+                    * ( 1 + (( p.globalAgeFactor - 100) / 200 ))
+                    ) 
+                    + (p.speed / ( p.actualAgeFactor / 100)) / 10 
+                    * ( 1 + (( p.globalAgeFactor - 100) / 200) 
+                    + ((p.endurance / (( p.actualAgeFactor / 100 ) * ( p.actualAgeFactor / 100)) ** (0.65 - (( p.globalAgeFactor - 100) / 1000))) * 1.4 * ( 0.91 + (( p.globalAgeFactor - 100) / 200)) * ( 0.91 + (( p.globalAgeFactor - 100) / 200)) + p.talent ** ( 0.7 - (( p.globalAgeFactor - 100 ) / 1000)) + ( p.mentality / 10 )) * 1.25   as HIDDEN potential')
+            ->orderBy('potential','DESC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult();
+    }
+
+
 
 //    /**
 //     * @return Player[] Returns an array of Player objects

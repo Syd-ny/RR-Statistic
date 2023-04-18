@@ -221,6 +221,11 @@ class Player
      */
     private $countries;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $endurance;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -630,6 +635,18 @@ class Player
     public function setCountries(?Country $countries): self
     {
         $this->countries = $countries;
+
+        return $this;
+    }
+
+    public function getEndurance(): ?float
+    {
+        return $this->endurance;
+    }
+
+    public function setEndurance(?float $endurance): self
+    {
+        $this->endurance = $endurance;
 
         return $this;
     }

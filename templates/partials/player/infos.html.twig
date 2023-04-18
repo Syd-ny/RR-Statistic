@@ -1,0 +1,26 @@
+{% include 'partials/array/looks.html.twig' %}
+    {% include 'partials/array/rankings.html.twig' %}
+        {% include 'partials/player/show.html.twig' %}
+            <p>{{ loop.index }}</p>
+        </a>
+    </div>
+    {% include 'partials/array/format.html.twig' %}
+        {% include 'partials/player/show.html.twig' %}
+            <p>{{ player.firstname }}</p>
+        </a>
+    </div>
+    {% include 'partials/array/format.html.twig' %}
+        {% include 'partials/player/show.html.twig' %}
+            <p>{{ player.lastname }}</p>
+        </a>
+    </div>
+    {% include 'partials/array/format.html.twig' %}
+        {% include 'partials/player/show.html.twig' %}
+            <p>{{ player.countries.getName }}</p>
+        </a>
+    </div>
+    {% include 'partials/array/format.html.twig' %}
+        {% include 'partials/player/show.html.twig' %}
+            <p>{{ player.age }}</p>
+        </a>
+    </div>

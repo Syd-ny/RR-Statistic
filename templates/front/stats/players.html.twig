@@ -10,136 +10,136 @@
             <h3 class="mb-1"></h3>
             <div class="mb-1 text-muted"></div>
                 <div class="row row-cols-16 align-items-center py-1">
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>First name</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Last name</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Country</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Age</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Ability</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Serve</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Double</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Talent</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Strenght</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Speed</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Mentality</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Endurance</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Hard</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Clay</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Grass</small></p>
                         </div>
-                        <div class="col border-end p-4 d-flex flex-column position-static">
+                        {% include 'partials/array/format.html.twig' %}
                             <p><small>Indoor</small></p>
                         </div>
                     </div>
                     <hr>
                 </div>
             {% for player in players %}               
-                <div class="row{% if loop.index is even %} bg-secondary{% else %} bg-white{% endif %} row-cols-16 align-items-center py-1">
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                {% include 'partials/array/looks.html.twig' %}
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.firstname }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.lastname }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.countries.getName }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.age }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.ability }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.serve }}</p>
                         </a> 
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.doubles }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.talent }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.strenght }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.speed }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.mentality }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>/</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.hard }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.clay }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.grass }}</p>
                         </a>
                     </div>
-                    <div class="col border-end p-4 d-flex flex-column position-static">
-                        <a href="{{ path('stats_players', {'id': player.id}) }}" class="text-dark text-decoration-none">
+                    {% include 'partials/array/format.html.twig' %}
+                        {% include 'partials/player/show.html.twig' %}
                             <p>{{ player.indoor }}</p>
                         </a>
                     </div>
