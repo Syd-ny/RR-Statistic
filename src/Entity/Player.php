@@ -226,6 +226,11 @@ class Player
      */
     private $endurance;
 
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     */
+    private $bgColor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -649,6 +654,16 @@ class Player
         $this->endurance = $endurance;
 
         return $this;
+    }
+
+    public function setBgColor(string $color)
+    {
+    $this->bgColor = $color;
+    }
+
+    public function getBgColor(): ?string
+    {
+        return $this->bgColor;
     }
 
 }

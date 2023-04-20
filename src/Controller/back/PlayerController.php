@@ -11,6 +11,7 @@ use App\Form\EditPlayerType;
 use App\Entity\Player;
 use App\Repository\PlayerRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\PlayerBgColorService;
 use DateTime;
 
 
@@ -24,7 +25,7 @@ class PlayerController extends AbstractController
      * 
      * @Route("/player/new", name="player_new", methods={"GET","POST"})
      */
-    public function new( Request $request, EntityManagerInterface $entityManager)
+    public function new( Request $request, EntityManagerInterface $entityManager,PlayerBgColorService $bgColorService)
     {
 
         $player = new Player();
@@ -39,6 +40,8 @@ class PlayerController extends AbstractController
 
             $entityManager->persist($player);
             $entityManager->flush();
+
+            $bgColorService->updatePlayersBgColor($player);
         
             return $this->redirectToRoute('player_show', ['id' => $player->getId()]);
        
@@ -55,7 +58,8 @@ class PlayerController extends AbstractController
      * 
      * @Route("/player/{id}/edit", name="player_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request,EntityManagerInterface $entityManager, Player $player)
+    public function edit(Request $request,EntityManagerInterface $entityManager, Player $player,
+    PlayerBgColorService $bgColorService)
     {
         $form = $this->createForm(EditPlayerType::class, $player);
 
@@ -67,6 +71,8 @@ class PlayerController extends AbstractController
             $player->setUpdatedAt(new DateTime());
 
             $entityManager->flush();
+
+            $bgColorService->updatePlayersBgColor($player);
 
             return $this->redirectToRoute('player_show',['id' => $player->getId()]);
         }
