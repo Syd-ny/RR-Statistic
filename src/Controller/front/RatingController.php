@@ -12,6 +12,7 @@ use App\Repository\PlayerRepository;
 class RatingController extends AbstractController
 {
 
+    private string $sortDirection = 'desc';
     /**
      * la route des ratings en simple des joueurs
      *  
@@ -21,7 +22,7 @@ class RatingController extends AbstractController
      */
     public function ratingSingle(PlayerPaginationService $paginationService,Request $request ): Response
     {
-        $allPlayers = $paginationService->getPlayersOrderedBySingleRating($request, 'desc');
+        $allPlayers = $paginationService->getPlayersOrderedBySingleRating($request, $this->sortDirection);
         
         return $this->render("front/ratings/single.html.twig",[
             'players' => $allPlayers,
@@ -37,7 +38,7 @@ class RatingController extends AbstractController
      */
     public function ratingDouble(PlayerPaginationService $paginationService,Request $request): Response
     {
-        $allPlayers = $paginationService->getPlayersOrderedByDoubleRating($request);
+        $allPlayers = $paginationService->getPlayersOrderedByDoubleRating($request,$this->sortDirection);
         
         return $this->render("front/ratings/double.html.twig",[
             'players' => $allPlayers,

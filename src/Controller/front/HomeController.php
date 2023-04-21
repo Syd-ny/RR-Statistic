@@ -32,6 +32,22 @@ class HomeController extends AbstractController
     }
 
     /**
+     * la route des joueurs les plus anciennement mis a jour
+     *  
+     * @Route("/to_update", name="to_update")
+     * 
+     * @return Response
+     */
+    public function toUpdate(PlayerPaginationService $paginationService,Request $request): Response
+    {
+        $allPlayers = $paginationService->getPlayersOrderedByOldestUpdated($request);
+        
+        return $this->render("front/home/toUpdate.html.twig", [
+            'players' => $allPlayers,
+        ]);
+    }
+
+    /**
      * la route des statistiques des joueurs
      *  
      * @Route("/stats", name="stats_players")

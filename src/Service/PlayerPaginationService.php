@@ -28,6 +28,18 @@ class PlayerPaginationService
         );
     }
 
+    public function getPlayersOrderedByOldestUpdated(Request $request, int $limit = 10)
+    {
+        $sortPlayers = $this->playerRepository->findAllOrderedByOldestUpdated();
+
+        return $this->paginator->paginate(
+            $sortPlayers,
+            $request->query->getInt('page', 1),
+            $limit
+        );
+    }
+
+
     public function getPlayersOrderedByName(Request $request, int $limit = 10, string $sortDirection ='asc')
     {
         $sortPlayers = $this->playerRepository->findAllOrderedByName($sortDirection);
@@ -43,11 +55,44 @@ class PlayerPaginationService
     {
         $sortPlayers = $this->playerRepository->findAllOrderedBySingleRating($sortDirection);
 
+        return $this->getPlayersWithRank($request, $sortPlayers, $limit, $startingRank);
+    }
+
+    public function getPlayersOrderedByDoubleRating(Request $request, string $sortDirection, int $limit = 10, int $startingRank = 1)
+    {
+        $sortPlayers = $this->playerRepository->findAllOrderedByDoublesRating($sortDirection);
+
+        return $this->getPlayersWithRank($request, $sortPlayers, $limit, $startingRank);
+    }
+
+    public function getPlayersOrderedBySingleLegacy(Request $request, string $sortDirection, int $limit = 10, int $startingRank = 1)
+    {
+        $sortPlayers = $this->playerRepository->findAllOrderedBySingleLegacyScore($sortDirection);
+
+        return $this->getPlayersWithRank($request, $sortPlayers, $limit, $startingRank);
+    }
+
+    public function getPlayersOrderedByDoubleLegacy(Request $request, string $sortDirection, int $limit = 10, int $startingRank = 1)
+    {
+        $sortPlayers = $this->playerRepository->findAllOrderedByDoublesLegacyScore($sortDirection);
+
+        return $this->getPlayersWithRank($request, $sortPlayers, $limit, $startingRank);
+    }
+
+    public function getPlayersOrderedByGlobalLegacy(Request $request, string $sortDirection, int $limit = 10, int $startingRank = 1)
+    {
+        $sortPlayers = $this->playerRepository->findAllOrderedByGlobalLegacyScore($sortDirection);
+
+        return $this->getPlayersWithRank($request, $sortPlayers, $limit, $startingRank);
+    }
+
+    private function getPlayersWithRank(Request $request, $sortPlayers, $limit, $startingRank)
+    {
         $currentPage = $request->query->getInt('page', 1);
         if($currentPage > 1) {
-            $offset = ($currentPage - 1) * $limit - 10;
+            $offset = 0;
         } else {
-        $offset = ($currentPage - 1) * $limit;
+            $offset = ($currentPage - 1) * $limit;
         }
         $startingRank = $offset + 1;
 
@@ -59,50 +104,6 @@ class PlayerPaginationService
         return $this->paginator->paginate(
             $sortPlayers,
             $currentPage,
-            $limit
-        );
-    }
-
-    public function getPlayersOrderedByDoubleRating(Request $request, int $limit = 10)
-    {
-        $sortPlayers = $this->playerRepository->findAllOrderedByDoublesRating();
-
-        return $this->paginator->paginate(
-            $sortPlayers,
-            $request->query->getInt('page', 1),
-            $limit
-        );
-    }
-
-    public function getPlayersOrderedBySingleLegacy(Request $request, int $limit = 10)
-    {
-        $sortPlayers = $this->playerRepository->findAllOrderedBySingleLegacyScore();
-
-        return $this->paginator->paginate(
-            $sortPlayers,
-            $request->query->getInt('page', 1),
-            $limit
-        );
-    }
-
-    public function getPlayersOrderedByDoubleLegacy(Request $request, int $limit = 10)
-    {
-        $sortPlayers = $this->playerRepository->findAllOrderedByDoublesLegacyScore();
-
-        return $this->paginator->paginate(
-            $sortPlayers,
-            $request->query->getInt('page', 1),
-            $limit
-        );
-    }
-
-    public function getPlayersOrderedByGlobalLegacy(Request $request, int $limit = 10)
-    {
-        $sortPlayers = $this->playerRepository->findAllOrderedByGlobalLegacyScore();
-
-        return $this->paginator->paginate(
-            $sortPlayers,
-            $request->query->getInt('page', 1),
             $limit
         );
     }

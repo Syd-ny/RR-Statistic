@@ -236,6 +236,11 @@ class Player
      */
     private $rank;
 
+    public function __construct()
+    {
+        $this->rank = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -671,7 +676,7 @@ class Player
         return $this->bgColor;
     }
 
-    public function getRank(): int
+    public function getRank(): ?int
     {
         return $this->rank;
     }

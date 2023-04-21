@@ -59,6 +59,18 @@ class PlayerRepository extends EntityRepository
             ->getResult();
     }
 
+    public function findAllOrderedByOldestUpdated()
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.statuses', 's')
+            ->andWhere('s.name NOT IN (:names)')
+            ->addSelect('COALESCE(p.updatedAt, p.createdAt) as HIDDEN myDate')
+            ->setParameter('names', ['Retreated', 'Trainer'])
+            ->orderBy('myDate','ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * Trie les joueurs selon leur nom, A-Z.
      *
@@ -90,11 +102,11 @@ class PlayerRepository extends EntityRepository
      * Trie les joueurs selon leur rating en double
      *
      */
-    public function findAllOrderedByDoublesRating()
+    public function findAllOrderedByDoublesRating(string $sortDirection = 'desc')
     {
         return $this->createQueryBuilder('p')
             ->addSelect('(p.ability + p.serve /2 + p.strenght /5 + p.speed /10+ p.mentality /10 + p.doubles /2.5) as HIDDEN rating')
-            ->orderBy('rating','DESC')
+            ->orderBy('rating',$sortDirection)
             ->getQuery()
             ->getResult();
     }
@@ -103,11 +115,11 @@ class PlayerRepository extends EntityRepository
      * Trie les joueurs selon leur legacy score en simple.
      *
      */
-    public function findAllOrderedBySingleLegacyScore()
+    public function findAllOrderedBySingleLegacyScore(string $sortDirection = 'desc')
     {
         return $this->createQueryBuilder('p')
             ->addSelect('(p.atpSingleLow + p.atpSingleMid * 8 + p.atpSingleHigh * 25 + p.tmcSingle * 35 + p.gsSingle * 100 + p.weeksN1Single * 3) as HIDDEN score')
-            ->orderBy('score','DESC')
+            ->orderBy('score',$sortDirection)
             ->getQuery()
             ->getResult();
     }
@@ -116,11 +128,11 @@ class PlayerRepository extends EntityRepository
      * Trie les joueurs selon leur legacy score en double.
      *
      */
-    public function findAllOrderedByDoublesLegacyScore()
+    public function findAllOrderedByDoublesLegacyScore(string $sortDirection = 'desc')
     {
         return $this->createQueryBuilder('p')
             ->addSelect('(p.atpDoubleLow + p.atpDoubleMid * 8 + p.atpDoubleHigh * 25 + p.tmcDouble * 35 + p.gsDouble * 100 + p.weeksN1Double * 3) as HIDDEN score')
-            ->orderBy('score','DESC')
+            ->orderBy('score',$sortDirection)
             ->getQuery()
             ->getResult();
     }
@@ -130,11 +142,11 @@ class PlayerRepository extends EntityRepository
      * Trie les joueurs selon leur legacy score global.
      *
      */
-    public function findAllOrderedByGlobalLegacyScore()
+    public function findAllOrderedByGlobalLegacyScore(string $sortDirection = 'desc')
     {
         return $this->createQueryBuilder('p')
             ->addSelect('(p.atpSingleLow + p.atpSingleMid * 8 + p.atpSingleHigh * 25 + p.tmcSingle * 35 + p.gsSingle * 100 + p.weeksN1Single * 3) + (p.atpDoubleLow + p.atpDoubleMid * 8 + p.atpDoubleHigh * 25 + p.tmcDouble * 35 + p.gsDouble * 100 + p.weeksN1Double * 3) / 3.5 as HIDDEN global')
-            ->orderBy('global','DESC')
+            ->orderBy('global',$sortDirection)
             ->getQuery()
             ->getResult();
     }

@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PalmaresController extends AbstractController
 {
+    
+    private string $sortDirection = 'desc';
 
     /**
      * la route des palmares en simple des joueurs
@@ -22,7 +24,7 @@ class PalmaresController extends AbstractController
      */
     public function palmaresSingle(PlayerPaginationService $paginationService,Request $request): Response
     {
-        $allPlayers = $paginationService->getPlayersOrderedBySingleLegacy($request);
+        $allPlayers = $paginationService->getPlayersOrderedBySingleLegacy($request, $this->sortDirection);
         
         return $this->render("front/palmares/single.html.twig",[
             'players' => $allPlayers,
@@ -38,7 +40,7 @@ class PalmaresController extends AbstractController
      */
     public function palmaresDouble(PlayerPaginationService $paginationService,Request $request): Response
     {
-        $allPlayers = $paginationService->getPlayersOrderedByDoubleLegacy($request);
+        $allPlayers = $paginationService->getPlayersOrderedByDoubleLegacy($request, $this->sortDirection);
         
         return $this->render("front/palmares/double.html.twig",[
             'players' => $allPlayers,
@@ -54,7 +56,7 @@ class PalmaresController extends AbstractController
      */
     public function palmaresGlobal(PlayerPaginationService $paginationService,Request $request): Response
     {
-        $allPlayers = $paginationService->getPlayersOrderedByGlobalLegacy($request);
+        $allPlayers = $paginationService->getPlayersOrderedByGlobalLegacy($request, $this->sortDirection);
         
         return $this->render("front/palmares/global.html.twig",[
             'players' => $allPlayers,

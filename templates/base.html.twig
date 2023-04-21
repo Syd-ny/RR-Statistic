@@ -34,14 +34,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ path('default') }}">Home</a>
+                            <a class="nav-link {{ app.request.attributes.get('_route') == 'default' ? 'active' }}" href="{{ path('default') }}">Home</a>
                         </li>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href=""><i class="bi bi-bookmark"></i> Favorite players</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('player_new') }}"><i class="bi bi-bookmark"></i> Add player</a>
+                            <a class="nav-link {{ app.request.attributes.get('_route') == 'player_new' ? 'active' }}" href="{{ path('player_new') }}"><i class="bi bi-bookmark"></i> Add player</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href=""><i class="bi bi-bookmark"></i> Simulate matches</a>
@@ -106,25 +106,28 @@
                     <h2 class="text-center text-muted fw-bold mb-4">Categories</h2>
                     <ul class="d-flex flex-column flex-wrap list-unstyled justify-content-center">
                         <li class="btn-group" role="group">
-                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="{{ path('default') }}">Last players</a>
+                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link{% if app.request.attributes.get('_route') == 'default' %} active{% endif %}" href="{{ path('default') }}">Last players</a>
                         </li>
                         <li class="btn-group" role="group">
-                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="{{ path('stats_players') }}">Players stats</a>
+                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link{% if app.request.attributes.get('_route') == 'to_update' %} active{% endif %}" href="{{ path('to_update') }}">players to update</a>
                         </li>
                         <li class="btn-group" role="group">
-                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="{{ path('ratings_single') }}">Single ratings</a>
+                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link{% if app.request.attributes.get('_route') == 'stats_players' %} active{% endif %}" href="{{ path('stats_players') }}">Players stats</a>
                         </li>
                         <li class="btn-group" role="group">
-                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="{{ path('ratings_double') }}">Double ratings</a>
+                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link{% if app.request.attributes.get('_route') == 'ratings_single' %} active{% endif %}" href="{{ path('ratings_single') }}">Single ratings</a>
                         </li>
                         <li class="btn-group" role="group">
-                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="{{ path('palmares_single') }}">Single Palmares</a>
+                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link{% if app.request.attributes.get('_route') == 'ratings_double' %} active{% endif %}" href="{{ path('ratings_double') }}">Double ratings</a>
                         </li>
                         <li class="btn-group" role="group">
-                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="{{ path('palmares_double') }}">Double Palmares</a>
+                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link{% if app.request.attributes.get('_route') == 'palmares_single' %} active{% endif %}" href="{{ path('palmares_single') }}">Single Palmares</a>
                         </li>
                         <li class="btn-group" role="group">
-                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link" href="{{ path('palmares_global') }}">Global Palmares</a>
+                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link{% if app.request.attributes.get('_route') == 'palmares_double' %} active{% endif %}" href="{{ path('palmares_double') }}">Double Palmares</a>
+                        </li>
+                        <li class="btn-group" role="group">
+                            <a class="btn btn-sm btn-outline-danger mx-1 mb-2 custom-link{% if app.request.attributes.get('_route') == 'palmares_global' %} active{% endif %}" href="{{ path('palmares_global') }}">Global Palmares</a>
                         </li>
                     </ul>
                 </div>
