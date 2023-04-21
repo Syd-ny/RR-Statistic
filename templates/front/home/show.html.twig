@@ -39,7 +39,7 @@
                                 <tr>
                                     <th scope="row">Serve</th>
                                     <td>{{ player.serve }}</td>
-                                </tr>
+                                </tr>                               
                                 <tr>
                                     <th scope="row">Strenght</th>
                                     <td>{{ player.strenght }}</td>
@@ -53,6 +53,13 @@
                                     <th scope="row">Max speed</th>
                                     {% set maxSpeed = player.speed / player.actualAgeFactor * 100 %}
                                     <td>{{ maxSpeed | round(2) }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Endurance</th>
+                                    <td>{{ player.endurance }}</td>
+                                    <th scope="row">Max Endurance</th>
+                                    {% set maxEndurance = player.Endurance / player.actualAgeFactor * 100 %}
+                                    <td>{{ maxEndurance | round(2) }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Mentality</th>

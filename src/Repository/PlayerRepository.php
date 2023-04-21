@@ -78,6 +78,9 @@ class PlayerRepository extends EntityRepository
     public function findAllOrderedByName(string $sortDirection)
     {
         return $this->createQueryBuilder('p')
+            ->leftJoin('p.statuses', 's')
+            ->andWhere('s.name NOT IN (:names)')
+            ->setParameter('names', ['Retreated', 'Trainer'])
             ->orderBy('p.firstname',$sortDirection)
             ->getQuery()
             ->getResult();
@@ -90,7 +93,10 @@ class PlayerRepository extends EntityRepository
     public function findAllOrderedBySingleRating(string $sortDirection = 'desc')
     {
         $sortPlayers = $this->createQueryBuilder('p')
+            ->leftJoin('p.statuses', 's')
+            ->andWhere('s.name NOT IN (:names)')
             ->addSelect('(p.ability + p.serve /2 + p.strenght /5 + p.speed /10 + p.mentality /10) as HIDDEN rating')
+            ->setParameter('names', ['Retreated', 'Trainer'])
             ->orderBy('rating',$sortDirection)
             ->getQuery()
             ->getResult();
@@ -105,7 +111,10 @@ class PlayerRepository extends EntityRepository
     public function findAllOrderedByDoublesRating(string $sortDirection = 'desc')
     {
         return $this->createQueryBuilder('p')
+            ->leftJoin('p.statuses', 's')
+            ->andWhere('s.name NOT IN (:names)')
             ->addSelect('(p.ability + p.serve /2 + p.strenght /5 + p.speed /10+ p.mentality /10 + p.doubles /2.5) as HIDDEN rating')
+            ->setParameter('names', ['Retreated', 'Trainer'])
             ->orderBy('rating',$sortDirection)
             ->getQuery()
             ->getResult();
