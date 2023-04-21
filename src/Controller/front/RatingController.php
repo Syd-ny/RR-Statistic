@@ -19,9 +19,9 @@ class RatingController extends AbstractController
      * 
      * @return Response
      */
-    public function ratingSingle(PlayerPaginationService $paginationService,Request $request): Response
+    public function ratingSingle(PlayerPaginationService $paginationService,Request $request ): Response
     {
-        $allPlayers = $paginationService->getPlayersOrderedBySingleRating($request);
+        $allPlayers = $paginationService->getPlayersOrderedBySingleRating($request, 'desc');
         
         return $this->render("front/ratings/single.html.twig",[
             'players' => $allPlayers,

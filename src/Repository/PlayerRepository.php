@@ -63,10 +63,10 @@ class PlayerRepository extends EntityRepository
      * Trie les joueurs selon leur nom, A-Z.
      *
      */
-    public function findAllOrderedByName()
+    public function findAllOrderedByName(string $sortDirection)
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.firstname','ASC')
+            ->orderBy('p.firstname',$sortDirection)
             ->getQuery()
             ->getResult();
     }
@@ -75,13 +75,15 @@ class PlayerRepository extends EntityRepository
      * Trie les joueurs selon leur rating en simple
      *
      */
-    public function findAllOrderedBySingleRating()
+    public function findAllOrderedBySingleRating(string $sortDirection = 'desc')
     {
-        return $this->createQueryBuilder('p')
+        $sortPlayers = $this->createQueryBuilder('p')
             ->addSelect('(p.ability + p.serve /2 + p.strenght /5 + p.speed /10 + p.mentality /10) as HIDDEN rating')
-            ->orderBy('rating','DESC')
+            ->orderBy('rating',$sortDirection)
             ->getQuery()
             ->getResult();
+
+        return $sortPlayers;
     }
 
     /**
@@ -154,6 +156,14 @@ class PlayerRepository extends EntityRepository
         ->setMaxResults(20)
         ->getQuery()
         ->getResult();
+    }
+
+    public function getPlayersCount()
+    {
+    return $this->createQueryBuilder('p')
+        ->select('COUNT(p.id)')
+        ->getQuery()
+        ->getSingleScalarResult();
     }
 
 

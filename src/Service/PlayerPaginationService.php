@@ -28,9 +28,9 @@ class PlayerPaginationService
         );
     }
 
-    public function getPlayersOrderedByName(Request $request, int $limit = 10)
+    public function getPlayersOrderedByName(Request $request, int $limit = 10, string $sortDirection ='asc')
     {
-        $sortPlayers = $this->playerRepository->findAllOrderedByName();
+        $sortPlayers = $this->playerRepository->findAllOrderedByName($sortDirection);
 
         return $this->paginator->paginate(
             $sortPlayers,
@@ -39,13 +39,26 @@ class PlayerPaginationService
         );
     }
 
-    public function getPlayersOrderedBySingleRating(Request $request, int $limit = 10)
+    public function getPlayersOrderedBySingleRating(Request $request, string $sortDirection, int $limit = 10, int $startingRank = 1)
     {
-        $sortPlayers = $this->playerRepository->findAllOrderedBySingleRating();
+        $sortPlayers = $this->playerRepository->findAllOrderedBySingleRating($sortDirection);
+
+        $currentPage = $request->query->getInt('page', 1);
+        if($currentPage > 1) {
+            $offset = ($currentPage - 1) * $limit - 10;
+        } else {
+        $offset = ($currentPage - 1) * $limit;
+        }
+        $startingRank = $offset + 1;
+
+        // Assign ranks to players
+        foreach ($sortPlayers as $player) {
+            $player->setRank($startingRank++);
+        }
 
         return $this->paginator->paginate(
             $sortPlayers,
-            $request->query->getInt('page', 1),
+            $currentPage,
             $limit
         );
     }

@@ -231,6 +231,11 @@ class Player
      */
     private $bgColor;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rank;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -664,6 +669,18 @@ class Player
     public function getBgColor(): ?string
     {
         return $this->bgColor;
+    }
+
+    public function getRank(): int
+    {
+        return $this->rank;
+    }
+
+    public function setRank(int $rank): self
+    {
+        $this->rank = $rank;
+
+        return $this;
     }
 
 }
