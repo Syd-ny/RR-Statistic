@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\NewPlayerType;
+use App\Form\SimulateMatchType;
 use App\Form\EditPlayerType;
 use App\Entity\Player;
 use App\Repository\PlayerRepository;
@@ -22,13 +22,13 @@ class MatchController extends AbstractController
     /**
      * La page de paramétrage de simulation
      * 
-     * @Route("/match/show", name="match_show", methods={"GET","POST"})
+     * @Route("/match/simulate", name="match_simulate", methods={"GET","POST"})
      */
     public function show( Request $request, EntityManagerInterface $entityManager)
     {
 
         $player = new Player();
-        $form = $this->createForm(NewPlayerType::class,$player);
+        $form = $this->createForm(SimulateMatchType::class,$player);
         
         $form->handleRequest($request);
         
@@ -44,8 +44,9 @@ class MatchController extends AbstractController
        
         }
 
-        return $this->renderForm('back/player/new.html.twig', [
-            'player'=> $player,
+        return $this->renderForm('back/simulation/match.html.twig', [
+            'player1_choices' => $player,
+            'player2_choices' => $player,
             'form' => $form,
         ]);
     }

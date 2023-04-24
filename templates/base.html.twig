@@ -44,7 +44,7 @@
                             <a class="nav-link {{ app.request.attributes.get('_route') == 'player_new' ? 'active' }}" href="{{ path('player_new') }}"><i class="bi bi-bookmark"></i> Add player</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href=""><i class="bi bi-bookmark"></i> Simulate matches</a>
+                            <a class="nav-link {{ app.request.attributes.get('_route') == 'match_simulate' ? 'active' }}" href="{{ path('match_simulate') }}"><i class="bi bi-bookmark"></i> Simulate matches</a>
                         </li>
                     </ul>
 
